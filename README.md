@@ -1,5 +1,7 @@
 <div align="center">
-  <img src="./frontend/public/Assets/Images/Logo-Brand/mondo-transparent.png" width="200" alt="Mondo Logo">
+  
+  <img width="200" height="200" alt="mondo-logos" src="https://github.com/user-attachments/assets/a800e44d-f055-4da4-a591-597cb79f7abf" />
+
 
 # Mondo
 
