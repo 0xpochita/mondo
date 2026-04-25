@@ -220,13 +220,6 @@ pnpm dev
 
 Open [http://localhost:3000/earn](http://localhost:3000/earn) to start discovering yield routes.
 
----
-
-## Built For
-
-[**DeFi Mullet Hackathon #1**](https://lifi.notion.site/defi-mullet-hackathon-1-builder-edition) — **Yield Builder** track.
-
-Built by **0xpochita** (Human) and **Claude Opus 4.6** (AI Agent).
 
 ---
 
