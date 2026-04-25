@@ -8,7 +8,9 @@
 **Best yield, one click. Aggregated live from 20+ DeFi protocols.**
 **Find the highest-APY vault route, deposit in a single transaction.**
 
+[![Built on Monad](https://img.shields.io/badge/Built%20on-Monad-836EF9?logo=ethereum&logoColor=white)](https://monad.xyz)
 [![LI.FI Earn](https://img.shields.io/badge/Powered%20by-LI.FI%20Earn-000)](https://li.fi)
+[![Monad Hackathon](https://img.shields.io/badge/Hackathon-Monad-836EF9)](https://monad.xyz)
 [![DeFi Mullet](https://img.shields.io/badge/Hackathon-DeFi%20Mullet%20%231-blue)](https://lifi.notion.site/defi-mullet-hackathon-1-builder-edition)
 [![Track](https://img.shields.io/badge/Track-Yield%20Builder-purple)](https://lifi.notion.site/defi-mullet-hackathon-1-builder-edition)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
@@ -21,9 +23,34 @@
 
 Yield farming is fragmented. Dozens of protocols, hundreds of vaults, scattered across chains. Finding the best opportunity means checking Aave, Morpho, Euler, Yo Protocol, and more — one by one.
 
-**Mondo** solves this by aggregating every vault opportunity in real time via the **LI.FI Earn API**. Pick a token, pick a chain, and instantly see the best yield routes ranked by APY, TVL, and risk tier. One-click deposit handles the swap, bridge, and deposit in a single signed transaction through **LI.FI Composer**.
+**Mondo** is a yield route aggregator **built for Monad**, with cross-chain support to 15+ EVM networks. It aggregates every vault opportunity in real time via the **LI.FI Earn API**. Pick a token, pick a chain, and instantly see the best yield routes ranked by APY, TVL, and risk tier. One-click deposit handles the swap, bridge, and deposit in a single signed transaction through **LI.FI Composer** — including atomic native **MON → WMON vault** deposits.
 
-Think: **DEX aggregator UX, applied to yield vaults.**
+Think: **DEX aggregator UX, applied to yield vaults — Monad-first.**
+
+---
+
+## Built for Monad
+
+Mondo is **Monad-native by default**. The app boots into Monad as the preferred network and surfaces Monad's emerging yield ecosystem first.
+
+| Monad-Native Capability | What It Does |
+|--------------------------|--------------|
+| **Default chain = Monad (143)** | Network picker, wallet connector, and portfolio filter all default to Monad |
+| **Native MON deposits** | Deposit native MON straight into WMON vaults — atomic wrap + deposit, single signature |
+| **MON ↔ WMON normalization** | Asset filter auto-maps MON → WMON when querying LI.FI Earn so vaults always surface |
+| **Monad-tuned TVL floor** | Per-chain `minTvlUsd` is `0` for Monad (vs. $100k elsewhere) so early-stage vaults appear |
+| **Real MON pricing** | Recomputes USD value from live `priceUSD` (LI.FI tokens) — no $1 stable-coin assumption |
+| **Curated Monad assets** | WMON, shMON, sMON, gMON, USDC, WETH, cbBTC, USDT0, USD1 all pre-included |
+
+**Monad protocols & vaults Mondo currently surfaces:**
+
+| Protocol | Vault Type | Underlying | Approx. TVL |
+|----------|------------|------------|-------------|
+| **Euler V2** | Lending vault (eWMON-7, eUSDC, eWBTC) | WMON, USDC, WBTC, XAUt0 | $50K – $335K |
+| **Neverland** | Liquid staking / yield | shMON, sMON, gMON, WETH, USDT0, earnAUSD, loAZND | $250K – $3.3M |
+| **Morpho V1** | Curated lending | STEAKETH, BBQCBBTC, BBQUSDT0, BBQUSD1, HYPERCBBTCA | $1.5M – $50M |
+
+Total: **45 Monad vaults discoverable** across **3 protocols** at the time of writing.
 
 ---
 
@@ -47,7 +74,7 @@ That's Mondo.
 
 Mondo treats yield vaults the way DEX aggregators treat token swaps. You don't manually check Uniswap, SushiSwap, and Curve to find the best swap rate — the aggregator does it for you. Mondo does the same thing for yield: it aggregates 20+ protocols via the LI.FI Earn API, surfaces the best opportunities in real time, and executes the deposit through LI.FI Composer. One interface. One transaction. Best rate.
 
-Dani opens Mondo, types "3000 USDC on Arbitrum," and instantly sees 15 vault routes ranked by APY. She filters for >5% APY and >$1M TVL, spots a Morpho vault on Base at 6.63%. She clicks it, reviews the strategy — APY, 30-day average, risk tier, timelock — then hits deposit. LI.FI handles the Arbitrum-to-Base bridge and the Morpho deposit in a single transaction. Twenty minutes of work, compressed into ten seconds.
+Dani opens Mondo, sees Monad pre-selected, types "10 MON" and instantly sees Euler, Neverland, and Morpho vaults ranked by APY. She filters for >5% APY, spots an Euler V2 WMON vault at 44.98% APY. She clicks it, reviews the strategy — APY, 30-day average, risk tier, timelock — then hits deposit. LI.FI Composer wraps her native MON, deposits into the Euler vault, and mints eWMON-7 shares — all in **one signed transaction**. Twenty minutes of manual work, compressed into ten seconds.
 
 ---
 
@@ -90,23 +117,25 @@ Dani opens Mondo, types "3000 USDC on Arbitrum," and instantly sees 15 vault rou
 
 ## Supported Chains
 
-| # | Chain | Chain ID | Status |
-|---|-------|----------|--------|
-| 1 | Monad | 143 | Live |
-| 2 | Base | 8453 | Live |
-| 3 | Ethereum | 1 | Live |
-| 4 | Monad | 143 | Live |
-| 5 | Polygon | 137 | Live |
-| 6 | Katana | 747474 | Live |
-| 7 | BSC | 56 | Live |
-| 8 | Optimism | 10 | Live |
-| 9 | Avalanche | 43114 | Live |
-| 10 | Linea | 59144 | Live |
-| 11 | Gnosis | 100 | Live |
-| 12 | Unichain | 130 | Live |
-| 13 | Mantle | 5000 | Live |
-| 14 | Sonic | 146 | Live |
-| 15 | Celo | 42220 | Live |
+Monad is the **default and primary** network. All other chains are supported for cross-chain deposits via LI.FI bridge.
+
+| # | Chain | Chain ID | Role | Status |
+|---|-------|----------|------|--------|
+| 1 | **Monad** | **143** | **Primary (default)** | Live |
+| 2 | Base | 8453 | Cross-chain | Live |
+| 3 | Ethereum | 1 | Cross-chain | Live |
+| 4 | Arbitrum | 42161 | Cross-chain | Live |
+| 5 | Polygon | 137 | Cross-chain | Live |
+| 6 | Katana | 747474 | Cross-chain | Live |
+| 7 | BSC | 56 | Cross-chain | Live |
+| 8 | Optimism | 10 | Cross-chain | Live |
+| 9 | Avalanche | 43114 | Cross-chain | Live |
+| 10 | Linea | 59144 | Cross-chain | Live |
+| 11 | Gnosis | 100 | Cross-chain | Live |
+| 12 | Unichain | 130 | Cross-chain | Live |
+| 13 | Mantle | 5000 | Cross-chain | Live |
+| 14 | Sonic | 146 | Cross-chain | Live |
+| 15 | Celo | 42220 | Cross-chain | Live |
 
 ---
 
@@ -170,6 +199,8 @@ Mondo is built entirely on the **LI.FI Earn** and **LI.FI Composer** APIs. Here 
 | Component | File | Description |
 |-----------|------|-------------|
 | **Vault Discovery** | [`lib/lifi-earn.ts`](./frontend/src/lib/lifi-earn.ts) | Fetches vault opportunities from LI.FI Earn API with chain, asset, and TVL filters |
+| **Monad Asset Mapping** | [`stores/expert-store.ts`](./frontend/src/stores/expert-store.ts) | Auto-maps native MON → WMON when querying vaults; per-chain `minTvlUsd` (0 for Monad) |
+| **MON Price Recompute** | [`lib/portfolio-fetcher.ts`](./frontend/src/lib/portfolio-fetcher.ts) | Replaces LI.FI's stale balanceUsd with live `priceUSD × balanceNative` for accurate Monad token valuations |
 | **Deposit Quotes** | [`lib/lifi-quote.ts`](./frontend/src/lib/lifi-quote.ts) | Gets deposit/withdraw quotes from LI.FI Composer — calculates optimal route |
 | **Vaults Proxy** | [`api/earn/vaults/route.ts`](./frontend/src/app/api/earn/vaults/route.ts) | Server-side proxy to LI.FI Earn API with API key injection |
 | **Quote Proxy** | [`api/earn/quote/route.ts`](./frontend/src/app/api/earn/quote/route.ts) | Server-side proxy to LI.FI Quote API |
@@ -224,6 +255,12 @@ Open [http://localhost:3000/earn](http://localhost:3000/earn) to start discoveri
 ---
 
 ## Resources
+
+### Monad
+- [Monad](https://monad.xyz)
+- [Monad Docs](https://docs.monad.xyz)
+- [Monad Explorer](https://monadexplorer.com)
+- Monad Protocols surfaced by Mondo: [Euler](https://app.euler.finance), [Neverland](https://neverland.fi), [Morpho](https://app.morpho.org)
 
 ### LI.FI
 - [LI.FI Earn Documentation](https://docs.li.fi/earn/overview)
