@@ -11,8 +11,6 @@
 [![Built on Monad](https://img.shields.io/badge/Built%20on-Monad-836EF9?logo=ethereum&logoColor=white)](https://monad.xyz)
 [![LI.FI Earn](https://img.shields.io/badge/Powered%20by-LI.FI%20Earn-000)](https://li.fi)
 [![Monad Hackathon](https://img.shields.io/badge/Hackathon-Monad-836EF9)](https://monad.xyz)
-[![DeFi Mullet](https://img.shields.io/badge/Hackathon-DeFi%20Mullet%20%231-blue)](https://lifi.notion.site/defi-mullet-hackathon-1-builder-edition)
-[![Track](https://img.shields.io/badge/Track-Yield%20Builder-purple)](https://lifi.notion.site/defi-mullet-hackathon-1-builder-edition)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 
 </div>
