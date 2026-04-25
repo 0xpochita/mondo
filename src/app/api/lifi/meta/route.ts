@@ -5,9 +5,11 @@ export const revalidate = 60;
 
 const CHAINS_URL = "https://li.quest/v1/chains";
 const TOKENS_URL = "https://li.quest/v1/tokens";
-const EARN_PROTOCOLS_URL = "https://earn.li.fi/v1/earn/protocols";
-const EARN_CHAINS_URL = "https://earn.li.fi/v1/earn/chains";
-const EARN_VAULTS_URL = "https://earn.li.fi/v1/earn/vaults";
+const LIFI_EARN_API_BASE_URL =
+  process.env.LIFI_EARN_API_BASE_URL ?? "https://earn.li.fi/v1";
+const EARN_PROTOCOLS_URL = `${LIFI_EARN_API_BASE_URL}/protocols`;
+const EARN_CHAINS_URL = `${LIFI_EARN_API_BASE_URL}/chains`;
+const EARN_VAULTS_URL = `${LIFI_EARN_API_BASE_URL}/vaults`;
 
 const PRIORITY_SYMBOLS = new Set([
   "ETH", "WETH", "USDC", "USDT", "DAI",
@@ -74,7 +76,9 @@ export async function GET() {
       } catch { }
     }
     if (earnChainIds.length === 0) {
-      earnChainIds = [1, 10, 56, 100, 130, 137, 146, 5000, 8453, 42161, 42220, 43114, 59144];
+      earnChainIds = [143, 1, 10, 56, 100, 130, 137, 146, 5000, 8453, 42161, 42220, 43114, 59144];
+    } else if (!earnChainIds.includes(143)) {
+      earnChainIds = [143, ...earnChainIds];
     }
 
     const vaultTokensByChain = new Map<number, Set<string>>();

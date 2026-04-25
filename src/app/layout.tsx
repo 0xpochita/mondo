@@ -10,9 +10,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Yieldo — Find the best yield route",
+  title: "Mondo — Find the best yield route",
   description:
-    "Yieldo discovers the best vault opportunities across 20+ DeFi protocols and deposits in one click.",
+    "Mondo discovers the best vault opportunities across 20+ DeFi protocols and deposits in one click.",
 };
 
 export default function RootLayout({
@@ -21,7 +21,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      data-theme="dark"
+      className={`${inter.variable} h-full antialiased`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: theme bootstrap must run before paint
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('mondo-theme');if(t==='light'||t==='dark'){document.documentElement.dataset.theme=t;}}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body className="min-h-full text-main flex flex-col">
         <Providers>{children}</Providers>
       </body>

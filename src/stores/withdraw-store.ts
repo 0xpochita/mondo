@@ -6,6 +6,7 @@ export type WithdrawStep =
   | "idle"
   | "quoting"
   | "ready"
+  | "approving"
   | "withdrawing"
   | "success"
   | "error";

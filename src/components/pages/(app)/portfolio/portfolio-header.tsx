@@ -36,8 +36,8 @@ export function PortfolioHeader({
       <div className="flex items-center gap-3">
         <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl bg-brand-soft">
           <Image
-            src="/Assets/Images/Logo-Brand/yieldo-transparent.png"
-            alt="Yieldo"
+            src="/Assets/Images/Logo-Brand/mondo-transparent.png"
+            alt="Mondo"
             width={40}
             height={40}
             className="h-10 w-10 object-contain"

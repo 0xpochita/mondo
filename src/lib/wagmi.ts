@@ -10,7 +10,7 @@ const allChains = Object.values(viemChains).filter(
 );
 
 const [primary, ...rest] = allChains.sort((a, b) => {
-  const priority = [42161, 8453, 10, 1, 137];
+  const priority = [143, 42161, 8453, 10, 1, 137];
   const ai = priority.indexOf(a.id);
   const bi = priority.indexOf(b.id);
   if (ai !== -1 && bi !== -1) return ai - bi;
@@ -21,7 +21,7 @@ const [primary, ...rest] = allChains.sort((a, b) => {
 
 export function createWagmiConfig(projectId: string) {
   return getDefaultConfig({
-    appName: "Yieldo",
+    appName: "Mondo",
     appDescription: "Find the best yield route across DeFi",
     projectId,
     chains: [primary, ...rest],

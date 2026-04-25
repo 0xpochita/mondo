@@ -68,7 +68,7 @@ export function TokensSection({
             </p>
             <p className="max-w-sm text-xs text-muted">
               We couldn&apos;t find any balances across the supported networks.
-              Bridge in funds to start earning on Yieldo.
+              Bridge in funds to start earning on Mondo.
             </p>
           </motion.div>
         ) : (

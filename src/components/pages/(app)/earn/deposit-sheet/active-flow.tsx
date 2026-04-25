@@ -463,13 +463,13 @@ export function ActiveFlow({ walletAddress }: { walletAddress: `0x${string}` }) 
 
       <div className="flex items-center gap-2 rounded-xl bg-surface-raised/60 px-3 py-2 text-[11px] text-muted">
         <Image
-          src="/Assets/Images/Logo-Brand/yieldo-transparent.png"
-          alt="Yieldo"
+          src="/Assets/Images/Logo-Brand/mondo-transparent.png"
+          alt="Mondo"
           width={16}
           height={16}
           className="h-4 w-4 object-contain"
         />
-        Non-custodial. Yieldo never holds your funds — your wallet signs every
+        Non-custodial. Mondo never holds your funds — your wallet signs every
         step.
       </div>
 

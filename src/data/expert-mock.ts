@@ -5,10 +5,10 @@ export const mockTokens: Token[] = [
 ];
 
 export const mockChains: Chain[] = [
+  { id: 143, name: "Monad", shortName: "Monad" },
   { id: 1, name: "Ethereum", shortName: "Ethereum" },
   { id: 8453, name: "Base", shortName: "Base" },
   { id: 42161, name: "Arbitrum One", shortName: "Arbitrum" },
-  { id: 143, name: "Monad", shortName: "Monad" },
   { id: 137, name: "Polygon", shortName: "Polygon" },
   { id: 747474, name: "Katana", shortName: "Katana" },
   { id: 56, name: "BNB Chain", shortName: "BSC" },

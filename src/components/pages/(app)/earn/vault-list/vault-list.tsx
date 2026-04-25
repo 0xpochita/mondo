@@ -211,8 +211,8 @@ export function VaultList() {
         <div className="flex items-center gap-3">
           <span className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-brand-soft">
             <Image
-              src="/Assets/Images/Logo-Brand/yieldo-logo.png"
-              alt="Yieldo"
+              src="/Assets/Images/Logo-Brand/mondo-transparent.png"
+              alt="Mondo"
               width={32}
               height={32}
               className="h-8 w-8 object-contain rounded-full"

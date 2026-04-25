@@ -43,6 +43,32 @@ type ExpertState = {
 
 let currentController: AbortController | null = null;
 
+const NATIVE_TO_WRAPPED: Record<string, string> = {
+  ETH: "WETH",
+  MON: "WMON",
+  BNB: "WBNB",
+  AVAX: "WAVAX",
+  MATIC: "WMATIC",
+  POL: "WPOL",
+  CELO: "WCELO",
+  S: "WS",
+  BTC: "WBTC",
+};
+
+function resolveQueryAsset(symbol: string): string {
+  const upper = symbol.toUpperCase();
+  return NATIVE_TO_WRAPPED[upper] ?? upper;
+}
+
+const MIN_TVL_BY_CHAIN: Record<number, number> = {
+  143: 0,
+};
+const DEFAULT_MIN_TVL_USD = 100_000;
+
+function resolveMinTvl(chainId: number): number {
+  return MIN_TVL_BY_CHAIN[chainId] ?? DEFAULT_MIN_TVL_USD;
+}
+
 function inferRisk(apyPercent: number, tvlUsd: number): VaultRisk {
   if (!Number.isFinite(apyPercent) || apyPercent <= 0) return "medium";
 
@@ -158,10 +184,10 @@ export const useExpertStore = create<ExpertState>((set, get) => ({
       const response = await fetchVaultsViaProxy(
         {
           chainId: chain.id,
-          asset: token.symbol,
+          asset: resolveQueryAsset(token.symbol),
           sortBy: "apy",
           limit: 100,
-          minTvlUsd: 100_000,
+          minTvlUsd: resolveMinTvl(chain.id),
         },
         controller.signal,
       );

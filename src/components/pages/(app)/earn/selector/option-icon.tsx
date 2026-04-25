@@ -17,6 +17,7 @@ export type SelectorProps = {
   onSelect: (key: string) => void;
   variant?: "chip" | "pill";
   emptyLabel?: string;
+  loading?: boolean;
 };
 
 export function OptionIcon({

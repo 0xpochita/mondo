@@ -33,9 +33,13 @@ export function NetworkFilter({
 
   const activeChain =
     networkFilter === "all" ? null : chainsById[networkFilter];
-  const chains = Object.values(chainsById).sort((a, b) =>
-    a.name.localeCompare(b.name),
-  );
+  const chains = Object.values(chainsById).sort((a, b) => {
+    const aIsMonad = a.name.toLowerCase().includes("monad");
+    const bIsMonad = b.name.toLowerCase().includes("monad");
+    if (aIsMonad && !bIsMonad) return -1;
+    if (!aIsMonad && bIsMonad) return 1;
+    return a.name.localeCompare(b.name);
+  });
 
   return (
     <div ref={containerRef} className="relative">

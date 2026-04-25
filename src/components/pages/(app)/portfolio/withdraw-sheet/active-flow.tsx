@@ -4,14 +4,24 @@ import {
   FiArrowDown,
   FiLoader,
 } from "react-icons/fi";
+import {
+  readContract,
+  waitForTransactionReceipt,
+  writeContract,
+} from "@wagmi/core";
 import Image from "next/image";
 import { useEffect } from "react";
 import { formatUnits, parseUnits } from "viem";
 import {
   useChainId,
+  useConfig,
   useSendTransaction,
   useSwitchChain,
 } from "wagmi";
+import {
+  ERC20_ABI,
+  NATIVE_TOKEN_ADDRESSES,
+} from "@/components/pages/(app)/earn/deposit-sheet/deposit-sheet-utils";
 import { resolveProtocol } from "@/lib/protocol-registry";
 import { useMetaStore, useWithdrawStore } from "@/stores";
 import {
@@ -54,6 +64,7 @@ function ActiveFlow({ walletAddress }: { walletAddress: `0x${string}` }) {
 
   const chainsById = useMetaStore((state) => state.chainsById);
 
+  const wagmiConfig = useConfig();
   const currentWalletChainId = useChainId();
   const { switchChainAsync } = useSwitchChain();
   const { sendTransactionAsync } = useSendTransaction();
@@ -93,7 +104,7 @@ function ActiveFlow({ walletAddress }: { walletAddress: `0x${string}` }) {
 
     try {
       if (currentWalletChainId !== position.chainId) {
-        setStep("withdrawing");
+        setStep("approving");
         try {
           await switchChainAsync({ chainId: position.chainId });
         } catch {
@@ -102,6 +113,37 @@ function ActiveFlow({ walletAddress }: { walletAddress: `0x${string}` }) {
           );
           setStep("ready");
           return;
+        }
+      }
+
+      const fromTokenAddress = position.asset.address.toLowerCase();
+      const isNative = NATIVE_TOKEN_ADDRESSES.has(fromTokenAddress);
+      const approvalAddress = (quote.estimate.approvalAddress ??
+        quote.transactionRequest.to) as `0x${string}`;
+
+      if (!isNative && approvalAddress) {
+        setStep("approving");
+        const amountNeeded = BigInt(quote.action.fromAmount);
+        const currentAllowance = (await readContract(wagmiConfig, {
+          address: fromTokenAddress as `0x${string}`,
+          abi: ERC20_ABI,
+          functionName: "allowance",
+          args: [walletAddress, approvalAddress],
+          chainId: position.chainId,
+        })) as bigint;
+
+        if (currentAllowance < amountNeeded) {
+          const approveHash = await writeContract(wagmiConfig, {
+            address: fromTokenAddress as `0x${string}`,
+            abi: ERC20_ABI,
+            functionName: "approve",
+            args: [approvalAddress, amountNeeded],
+            chainId: position.chainId,
+          });
+          await waitForTransactionReceipt(wagmiConfig, {
+            hash: approveHash,
+            chainId: position.chainId,
+          });
         }
       }
 
@@ -155,7 +197,7 @@ function ActiveFlow({ walletAddress }: { walletAddress: `0x${string}` }) {
 
   if (!quote) return null;
 
-  const isWorking = step === "withdrawing";
+  const isWorking = step === "withdrawing" || step === "approving";
   const toAmountDecimals = quote.action.toToken?.decimals ?? 18;
   const toAmountDisplay = quote.estimate.toAmount
     ? formatUnits(BigInt(quote.estimate.toAmount), toAmountDecimals)
@@ -283,8 +325,8 @@ function ActiveFlow({ walletAddress }: { walletAddress: `0x${string}` }) {
 
       <div className="flex items-center gap-2 rounded-xl bg-surface-raised/60 px-3 py-2 text-[11px] text-muted">
         <Image
-          src="/Assets/Images/Logo-Brand/yieldo-transparent.png"
-          alt="Yieldo"
+          src="/Assets/Images/Logo-Brand/mondo-transparent.png"
+          alt="Mondo"
           width={16}
           height={16}
           className="h-4 w-4 object-contain"
@@ -307,7 +349,9 @@ function ActiveFlow({ walletAddress }: { walletAddress: `0x${string}` }) {
         {isWorking ? (
           <>
             <FiLoader className="h-4 w-4 animate-spin" />
-            Confirm in your wallet
+            {step === "approving"
+              ? "Check your wallet to approve"
+              : "Confirm in your wallet"}
           </>
         ) : (
           "Confirm withdrawal"

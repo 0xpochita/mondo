@@ -156,7 +156,8 @@ export function SupplyCard() {
               options={tokenOptions}
               onSelect={handleTokenSelect}
               variant="pill"
-              emptyLabel={metaStatus === "ready" ? "No tokens" : "Loading…"}
+              emptyLabel="No tokens"
+              loading={metaStatus !== "ready"}
             />
           </div>
           <div className="mt-2 flex items-center justify-between text-xs">

@@ -70,7 +70,7 @@ export function ShareCard({
         backgroundColor: "#0d0e0f",
       });
       const link = document.createElement("a");
-      link.download = "yieldo-earn.png";
+      link.download = "mondo-earn.png";
       link.href = dataUrl;
       link.click();
     } catch { } finally {
@@ -119,8 +119,8 @@ export function ShareCard({
                 <div className="relative flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <img
-                      src="/Assets/Images/Logo-Brand/yieldo-transparent.png"
-                      alt="Yieldo"
+                      src="/Assets/Images/Logo-Brand/mondo-transparent.png"
+                      alt="Mondo"
                       width={28}
                       height={28}
                       style={{ width: 28, height: 28, objectFit: "contain" }}
@@ -133,7 +133,7 @@ export function ShareCard({
                         letterSpacing: "-0.01em",
                       }}
                     >
-                      Yieldo
+                      Mondo
                     </span>
                   </div>
                   <span
@@ -328,11 +328,11 @@ export function ShareCard({
                         color: "#6b6b75",
                       }}
                     >
-                      Earn with Yieldo
+                      Earn with Mondo
                     </span>
                     <img
-                      src="/Assets/Images/Logo-Brand/yieldo-transparent.png"
-                      alt="Yieldo"
+                      src="/Assets/Images/Logo-Brand/mondo-transparent.png"
+                      alt="Mondo"
                       width={14}
                       height={14}
                       style={{ width: 14, height: 14, objectFit: "contain" }}

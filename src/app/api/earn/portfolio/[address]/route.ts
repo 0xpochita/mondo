@@ -3,7 +3,9 @@ import { type NextRequest, NextResponse } from "next/server";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const LIFI_PORTFOLIO_URL = "https://earn.li.fi/v1/earn/portfolio";
+const LIFI_EARN_API_BASE_URL =
+  process.env.LIFI_EARN_API_BASE_URL ?? "https://earn.li.fi/v1";
+const LIFI_PORTFOLIO_URL = `${LIFI_EARN_API_BASE_URL}/portfolio`;
 
 const ADDRESS_PATTERN = /^0x[a-fA-F0-9]{40}$/;
 

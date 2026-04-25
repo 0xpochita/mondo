@@ -36,15 +36,15 @@ export function TotalSummary({
         <div className="flex items-center gap-2">
           <span className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-full bg-brand-soft">
             <Image
-              src="/Assets/Images/Logo-Brand/yieldo-logo.png"
-              alt="Yieldo"
+              src="/Assets/Images/Logo-Brand/mondo-transparent.png"
+              alt="Mondo"
               width={24}
               height={24}
               className="h-6 w-6 object-contain"
             />
           </span>
           <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-faint">
-            Net worth on Yieldo
+            Net worth on Mondo
           </span>
         </div>
 

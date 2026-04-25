@@ -1,11 +1,13 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Yieldo Earn Positions";
+export const alt = "Mondo Earn Positions";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const LIFI_PORTFOLIO_URL = "https://earn.li.fi/v1/earn/portfolio";
+const LIFI_EARN_API_BASE_URL =
+  process.env.LIFI_EARN_API_BASE_URL ?? "https://earn.li.fi/v1";
+const LIFI_PORTFOLIO_URL = `${LIFI_EARN_API_BASE_URL}/portfolio`;
 const ADDRESS_PATTERN = /^0x[a-fA-F0-9]{40}$/;
 
 type Position = {
@@ -64,7 +66,7 @@ export default async function OGImage({
             fontWeight: 700,
           }}
         >
-          Yieldo
+          Mondo
         </div>
       ),
       { ...size },
@@ -130,7 +132,7 @@ export default async function OGImage({
                 letterSpacing: "-0.02em",
               }}
             >
-              Yieldo
+              Mondo
             </span>
           </div>
           <span
@@ -286,7 +288,7 @@ export default async function OGImage({
               color: "#6b6b75",
             }}
           >
-            Earn with Yieldo
+            Earn with Mondo
           </span>
           <span
             style={{

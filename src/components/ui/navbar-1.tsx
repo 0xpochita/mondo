@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { ThemeToggle } from "./theme-toggle";
 import { WalletButton } from "./wallet-button";
 
 const NAV_LINKS: { label: string; href: string }[] = [
@@ -21,7 +22,7 @@ const Navbar1 = () => {
 
   return (
     <div className="flex w-full justify-center px-4 py-6">
-      <div className="relative z-10 flex w-full max-w-3xl items-center justify-between rounded-full border border-white/15 bg-white/10 px-6 py-3 backdrop-blur-2xl backdrop-saturate-150 before:pointer-events-none before:absolute before:inset-0 before:rounded-full before:bg-[linear-gradient(140deg,rgba(255,255,255,0.18),rgba(255,255,255,0.02)_55%,rgba(255,255,255,0.06))] before:content-['']">
+      <div className="relative z-10 flex w-full max-w-3xl items-center justify-between rounded-full border border-glass bg-glass px-6 py-3 backdrop-blur-2xl backdrop-saturate-150 before:pointer-events-none before:absolute before:inset-0 before:rounded-full before:bg-[linear-gradient(140deg,rgba(255,255,255,0.18),rgba(255,255,255,0.02)_55%,rgba(255,255,255,0.06))] before:content-['']">
         <div className="flex items-center">
           <Link href="/earn" className="flex items-center gap-2 cursor-pointer">
             <motion.div
@@ -32,16 +33,16 @@ const Navbar1 = () => {
               transition={{ duration: 0.3 }}
             >
               <Image
-                src="/Assets/Images/Logo-Brand/yieldo-transparent.png"
-                alt="Yieldo"
+                src="/Assets/Images/Logo-Brand/mondo-transparent.png"
+                alt="Mondo"
                 fill
                 priority
                 sizes="36px"
                 className="object-contain"
               />
             </motion.div>
-            <span className="hidden text-base font-semibold tracking-tight text-white sm:inline">
-              Yieldo
+            <span className="hidden text-base font-semibold tracking-tight text-main sm:inline">
+              Mondo
             </span>
           </Link>
         </div>
@@ -61,8 +62,8 @@ const Navbar1 = () => {
                   href={item.href}
                   className={
                     isActive
-                      ? "relative z-10 text-sm font-semibold text-white transition-colors cursor-pointer"
-                      : "relative z-10 text-sm font-medium text-white/60 transition-colors hover:text-white cursor-pointer"
+                      ? "relative z-10 text-sm font-semibold text-main transition-colors cursor-pointer"
+                      : "relative z-10 text-sm font-medium text-muted transition-colors hover:text-main cursor-pointer"
                   }
                 >
                   {item.label}
@@ -73,30 +74,35 @@ const Navbar1 = () => {
         </nav>
 
         <motion.div
-          className="hidden md:block"
+          className="hidden items-center gap-2 md:flex"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.3, delay: 0.2 }}
-          whileHover={{ scale: 1.05 }}
         >
-          <WalletButton variant="desktop" />
+          <ThemeToggle />
+          <motion.div whileHover={{ scale: 1.05 }}>
+            <WalletButton variant="desktop" />
+          </motion.div>
         </motion.div>
 
-        <motion.button
-          type="button"
-          aria-label="Toggle menu"
-          className="relative z-10 flex items-center md:hidden cursor-pointer"
-          onClick={toggleMenu}
-          whileTap={{ scale: 0.9 }}
-        >
-          <FiMenu className="h-6 w-6 text-white" />
-        </motion.button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <motion.button
+            type="button"
+            aria-label="Toggle menu"
+            className="relative z-10 flex items-center cursor-pointer"
+            onClick={toggleMenu}
+            whileTap={{ scale: 0.9 }}
+          >
+            <FiMenu className="h-6 w-6 text-main" />
+          </motion.button>
+        </div>
       </div>
 
       <AnimatePresence>
         {isOpen ? (
           <motion.div
-            className="fixed inset-0 z-50 bg-[rgba(13,14,15,0.75)] px-6 pt-24 backdrop-blur-2xl md:hidden"
+            className="fixed inset-0 z-50 bg-overlay px-6 pt-24 backdrop-blur-2xl md:hidden"
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
@@ -112,7 +118,7 @@ const Navbar1 = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              <FiX className="h-6 w-6 text-white" />
+              <FiX className="h-6 w-6 text-main" />
             </motion.button>
             <div className="flex flex-col space-y-6">
               {NAV_LINKS.map((item, index) => (
@@ -125,7 +131,7 @@ const Navbar1 = () => {
                 >
                   <Link
                     href={item.href}
-                    className="text-base font-medium text-white cursor-pointer"
+                    className="text-base font-medium text-main cursor-pointer"
                     onClick={toggleMenu}
                   >
                     {item.label}

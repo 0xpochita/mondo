@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 const ADDRESS_PATTERN = /^0x[a-fA-F0-9]{40}$/;
-const LIFI_PORTFOLIO_URL = "https://earn.li.fi/v1/earn/portfolio";
+const LIFI_EARN_API_BASE_URL =
+  process.env.LIFI_EARN_API_BASE_URL ?? "https://earn.li.fi/v1";
+const LIFI_PORTFOLIO_URL = `${LIFI_EARN_API_BASE_URL}/portfolio`;
 
 type Props = {
   params: Promise<{ address: string }>;
@@ -37,7 +39,7 @@ function formatUsd(value: number): string {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { address } = await params;
   if (!ADDRESS_PATTERN.test(address)) {
-    return { title: "Yieldo" };
+    return { title: "Mondo" };
   }
 
   const positions = await fetchPositions(address);
@@ -47,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     0,
   );
   const short = `${address.slice(0, 6)}...${address.slice(-4)}`;
-  const title = `${short} is earning ${formatUsd(totalUsd)} on Yieldo`;
+  const title = `${short} is earning ${formatUsd(totalUsd)} on Mondo`;
   const description = `${positions.length} active vault${positions.length === 1 ? "" : "s"} across DeFi. Best yield, one click.`;
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://yieldo-earn.vercel.app";
@@ -60,7 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       type: "website",
-      siteName: "Yieldo",
+      siteName: "Mondo",
       url: `${baseUrl}/share/${address}`,
     },
     twitter: {

@@ -20,7 +20,7 @@ export function ConnectPromptCard() {
           Connect your wallet to view your portfolio
         </h2>
         <p className="mt-2 text-sm text-muted">
-          Yieldo reads real balances and earn positions directly from the
+          Mondo reads real balances and earn positions directly from the
           connected wallet across every supported network — we never hold your
           funds.
         </p>

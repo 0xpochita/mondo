@@ -1,4 +1,4 @@
-const STORAGE_KEY = "yieldo_tracked_vaults";
+const STORAGE_KEY = "mondo_tracked_vaults";
 
 const KNOWN_VAULTS: Omit<TrackedVault, "depositedAt">[] = [
   {

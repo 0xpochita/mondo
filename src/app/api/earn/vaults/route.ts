@@ -3,7 +3,9 @@ import { type NextRequest, NextResponse } from "next/server";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const LIFI_EARN_VAULTS_URL = "https://earn.li.fi/v1/earn/vaults";
+const LIFI_EARN_API_BASE_URL =
+  process.env.LIFI_EARN_API_BASE_URL ?? "https://earn.li.fi/v1";
+const LIFI_EARN_VAULTS_URL = `${LIFI_EARN_API_BASE_URL}/vaults`;
 
 const PASS_THROUGH_PARAMS = [
   "chainId",

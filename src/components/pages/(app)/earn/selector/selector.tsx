@@ -15,6 +15,7 @@ export function Selector({
   onSelect,
   variant = "pill",
   emptyLabel,
+  loading = false,
 }: SelectorProps) {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
@@ -61,14 +62,22 @@ export function Selector({
       <motion.button
         type="button"
         aria-label={label}
-        disabled={options.length === 0}
+        disabled={options.length === 0 || loading}
         onClick={() => setOpen((prev) => !prev)}
-        className={`${triggerClass} disabled:cursor-not-allowed disabled:opacity-50`}
-        whileHover={options.length > 0 ? { scale: 1.03 } : undefined}
-        whileTap={options.length > 0 ? { scale: 0.96 } : undefined}
+        className={`${triggerClass} disabled:cursor-not-allowed`}
+        whileHover={options.length > 0 && !loading ? { scale: 1.03 } : undefined}
+        whileTap={options.length > 0 && !loading ? { scale: 0.96 } : undefined}
         transition={{ type: "spring", stiffness: 500, damping: 30 }}
       >
-        {active ? (
+        {loading && !active ? (
+          <>
+            <span
+              className="animate-pulse rounded-full bg-surface-muted"
+              style={{ width: 24, height: 24 }}
+            />
+            <span className="animate-pulse h-3 w-14 rounded-full bg-surface-muted" />
+          </>
+        ) : active ? (
           <>
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.span
@@ -96,7 +105,7 @@ export function Selector({
             </AnimatePresence>
           </>
         ) : (
-          <span className="tracking-tight text-muted">{emptyLabel ?? "Loading…"}</span>
+          <span className="tracking-tight text-muted">{emptyLabel ?? "—"}</span>
         )}
         <motion.span
           animate={{ rotate: open ? 180 : 0 }}

@@ -50,11 +50,11 @@ const FEATURE_CARDS: FeatureCard[] = [
 export function IdleAggregatorCard() {
   return (
     <FeatureSections
-      eyebrow="Yieldo Aggregator"
+      eyebrow="Mondo Aggregator"
       eyebrowIcon={
         <Image
-          src="/Assets/Images/Logo-Brand/yieldo-transparent.png"
-          alt="Yieldo"
+          src="/Assets/Images/Logo-Brand/mondo-transparent.png"
+          alt="Mondo"
           width={18}
           height={18}
           className="h-4 w-4 object-contain"

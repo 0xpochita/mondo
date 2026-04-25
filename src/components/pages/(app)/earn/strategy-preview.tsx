@@ -26,8 +26,8 @@ export function StrategyPreview() {
       <div className="relative flex items-center gap-2">
         <span className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-full bg-brand-soft">
           <Image
-            src="/Assets/Images/Logo-Brand/yieldo-transparent.png"
-            alt="Yieldo"
+            src="/Assets/Images/Logo-Brand/mondo-transparent.png"
+            alt="Mondo"
             width={20}
             height={20}
             className="h-5 w-5 object-contain rounded-full"

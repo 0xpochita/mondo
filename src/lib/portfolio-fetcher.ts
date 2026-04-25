@@ -203,7 +203,11 @@ export async function loadPortfolioSnapshot({
     positions = [];
   }
 
-  const onChainPositions = await loadTrackedVaultPositions(config, address);
+  const onChainPositions = await loadTrackedVaultPositions(
+    config,
+    address,
+    meta.tokensByChain,
+  );
   if (onChainPositions.length > 0) {
     const lifiKeys = new Set(
       positions.map((p) => `${p.chainId}-${p.protocolName}`),
@@ -241,9 +245,18 @@ export async function loadPortfolioSnapshot({
 async function loadTrackedVaultPositions(
   config: Config,
   address: `0x${string}`,
+  tokensByChain: Record<number, LifiTokenMeta[]>,
 ): Promise<LifiPortfolioPosition[]> {
   const tracked = getTrackedVaults();
   if (tracked.length === 0) return [];
+
+  function priceForSymbol(chainId: number, symbol: string): number {
+    const list = tokensByChain[chainId];
+    if (!list) return 0;
+    const upper = symbol.toUpperCase();
+    const match = list.find((t) => t.symbol?.toUpperCase() === upper);
+    return toPrice(match?.priceUSD);
+  }
 
   const byChain = new Map<number, typeof tracked>();
   for (const vault of tracked) {
@@ -288,6 +301,8 @@ async function loadTrackedVaultPositions(
         const decimals = Number(decResult.result);
         const amount = Number(formatUnits(balance, decimals));
 
+        const priceUsd = priceForSymbol(vault.chainId, vault.tokenSymbol);
+
         results.push({
           chainId: vault.chainId,
           protocolName: vault.protocolName,
@@ -298,7 +313,7 @@ async function loadTrackedVaultPositions(
             decimals,
           },
           balanceNative: amount.toFixed(Math.min(decimals, 8)),
-          balanceUsd: (amount * 1).toFixed(6),
+          balanceUsd: (amount * priceUsd).toFixed(6),
         });
       });
     } catch { }
