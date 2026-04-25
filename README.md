@@ -5,8 +5,8 @@
 
 # Mondo
 
-**Best yield, one click. Aggregated live from 20+ DeFi protocols.**
-**Find the highest-APY vault route, deposit in a single transaction.**
+**The Monad-first yield aggregator. One click from native MON to the best vault.**
+**45+ Monad vaults across Euler, Neverland & Morpho — atomic wrap + deposit, single signature.**
 
 [![Built on Monad](https://img.shields.io/badge/Built%20on-Monad-836EF9?logo=ethereum&logoColor=white)](https://monad.xyz)
 [![LI.FI Earn](https://img.shields.io/badge/Powered%20by-LI.FI%20Earn-000)](https://li.fi)
